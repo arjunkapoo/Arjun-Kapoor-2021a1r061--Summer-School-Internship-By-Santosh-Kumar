@@ -22,7 +22,7 @@ int main() {
         std::cout << elem << " ";
     }
     std::cout << std::endl;
-    std::cout << "Elements using iterator: ";
+    std::cout << "Elements using iterator: "; //for iterator
     for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it) {
         std::cout << *it << " ";
     }
