@@ -1,0 +1,91 @@
+Questions :
+
+Problem Statement
+
+A event is organised in your College. The event is organised for a limited time(T). The number of student entering and leaving the event at every hour is represented as elements of the array. The task is to find the maximum number of students present in the event at any given instance within T hours.
+
+Input Format
+
+Input T
+Input Number of student entering in the event in a that time limit
+Input Number of student leaving in the event in a that time limit
+Constraints
+
+1 <= T <= 100
+
+Output Format
+
+Print Maximum number of students in event at any instance.
+
+Sample Input 0
+
+5
+5 1 7 3 8
+3 2 4 0 2
+Sample Output 0
+
+13
+
+Coding :
+
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+
+    vector<int> entering(T);
+    vector<int> leaving(T);
+
+    // Read the number of students entering each hour
+    for (int i = 0; i < T; ++i) {
+        cin >> entering[i];
+    }
+
+    // Read the number of students leaving each hour
+    for (int i = 0; i < T; ++i) {
+        cin >> leaving[i];
+    }
+
+    int currentStudents = 0;
+    int maxStudents = 0;
+
+    // Calculate the number of students present at each hour
+    for (int i = 0; i < T; ++i) {
+        currentStudents += entering[i];  // Add students entering
+        currentStudents -= leaving[i];   // Subtract students leaving
+
+        // Update maximum number of students if current is greater
+        if (currentStudents > maxStudents) {
+            maxStudents = currentStudents;
+        }
+    }
+
+    // Output the maximum number of students present at any instance
+    cout << maxStudents << endl;
+
+    return 0;
+}
