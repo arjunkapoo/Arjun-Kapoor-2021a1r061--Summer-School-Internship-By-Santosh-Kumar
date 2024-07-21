@@ -1,0 +1,73 @@
+Questions :
+
+Problem Statement Here, We need to write a code to find all the possible ways in which n people can occupy r number of seats in a classroom/theater.
+
+N students are looking to find r seats in a classroom. Some of the seats are already occupied and only a few can accommodate in the classroom. The available seats are assumed as r and n number of people are looking to accommodate within the room.
+
+Input Format
+
+User gives two inputs(number of people and seats).
+
+Constraints
+
+1 <= N,R <=1000
+
+Output Format
+
+If the number is people are more than the number of seats then print "Cannot adjust n people on r seats" otherwise print all possible arrangements
+
+Sample Input 0
+
+5 9
+Sample Output 0
+
+15120
+
+Coding :
+
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+long long factorial(int num) {
+    long long fact = 1;
+    for (int i = 1; i <= num; ++i) {
+        fact *= i;
+    }
+    return fact;
+}
+
+long long permutations(int n, int r) {
+    return factorial(r) / factorial(r - n);
+}
+
+int main() {
+    int n, r;
+    cin >> n >> r;
+    if (n > r) {
+        cout << "Cannot adjust " << n << " people on " << r << " seats" << endl;
+    } else {
+        cout << permutations(n, r) << endl;
+    }
+    return 0;
+}
