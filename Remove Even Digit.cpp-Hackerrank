@@ -1,0 +1,76 @@
+Questions :
+
+Problem Statement
+
+Andy is working in a XYZ Company. Company assign a task to Andy that design an application that remove all even digits from a number. Help Andy to design this application.
+
+Input Format
+
+Take Number as a input
+
+Constraints
+
+1 <= N <= 100000
+
+Output Format
+
+Print the number n with all even digits removed. If the original number n contains only even digits, print 0.
+
+Sample Input 0
+
+12345
+Sample Output 0
+
+135
+Sample Input 1
+
+2482
+Sample Output 1
+
+0
+
+Coding :
+
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+int main() {
+    string N;
+    cin >> N;
+    string result = "";
+
+    for (char c : N) {
+        if (c != '0' && c != '2' && c != '4' && c != '6' && c != '8') {
+            result += c;
+        }
+    }
+
+    if (result.empty()) {
+        result = "0";
+    }
+
+    cout << result << endl;
+    return 0;
+}
