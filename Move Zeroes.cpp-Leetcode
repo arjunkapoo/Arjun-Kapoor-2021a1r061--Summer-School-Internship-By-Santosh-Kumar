@@ -26,16 +26,14 @@ Coding :
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        int lastNonZeroFoundAt = 0;
-
-        for (int current = 0; current < nums.size(); current++) {
-            if (nums[current] != 0) {
-                nums[lastNonZeroFoundAt++] = nums[current];
+        int size = nums.size();
+        for (auto i=nums.begin();i<nums.end();){
+            if(*i==0){
+                nums.erase(i);
             }
+            else
+                i++;
         }
-
-        for (int i = lastNonZeroFoundAt; i < nums.size(); i++) {
-            nums[i] = 0;
-        }
+        nums.resize(size);
     }
 };
