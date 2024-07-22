@@ -1,0 +1,56 @@
+Questions :  
+
+Problem Statement
+
+Given an integer array Arr of size N the task is to find the count of elements whose value is greater than all of its prior elements.
+
+Note : 1st element of the array should be considered in the count of the result.
+
+Input Format
+
+Input Size i.e N Read N elementes in an array
+
+Constraints
+
+1 <= N <=100
+
+Output Format
+
+Print count of elements whose value is greater than all of its prior elements
+
+Sample Input 0
+
+5
+7 4 8 2 9
+Sample Output 0
+
+3
+
+Coding :
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+
+    vector<int> Arr(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> Arr[i];
+    }
+
+    int count = 1; // the first element is always counted
+    int max_value = Arr[0]; // initialize max_value with the first element
+
+    for (int i = 1; i < N; ++i) {
+        if (Arr[i] > max_value) {
+            ++count;
+            max_value = Arr[i];
+        }
+    }
+
+    cout << count << endl;
+    return 0;
+}
