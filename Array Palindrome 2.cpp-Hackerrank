@@ -1,0 +1,88 @@
+Questions :
+
+Problem Statement
+
+Given an array of positive integers. We need to make the given array a ‘Palindrome’. The only allowed operation is”merging” (of two adjacent elements). Merging two adjacent elements means replacing them with their sum.
+
+The task is to find the minimum number of merge operations required to make the given array a ‘Palindrome’.
+
+Example :
+Input : arr[] = {15, 4, 15}
+Output : 0
+Array is already a palindrome. So we do not need any merge operation.
+
+
+Input : arr[] = {1, 4, 5, 1}
+Output : 1
+We can make given array palindrome with minimum one merging (merging 4 and 5 to make 9)
+
+
+Input : arr[] = {11, 14, 15, 99}
+Output : 3
+We need to merge all elements to make a palindrome.
+
+Input Format
+
+Read the size of an array
+Read array elements
+Constraints
+
+1 <= N <= 1000
+0 <= array[i] <= 105
+Output Format
+
+Print the minimum number of merge operations required to make the given array a ‘Palindrome’.
+
+Sample Input 0
+
+4
+1 4 5 1
+Sample Output 0
+
+1
+
+Coding :
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int minMergesToPalindrome(vector<int>& arr) {
+    int left = 0;
+    int right = arr.size() - 1;
+    int mergeCount = 0;
+    
+    while (left < right) {
+        if (arr[left] == arr[right]) {
+            left++;
+            right--;
+        } else if (arr[left] < arr[right]) {
+            arr[left + 1] += arr[left];
+            left++;
+            mergeCount++;
+        } else {
+            arr[right - 1] += arr[right];
+            right--;
+            mergeCount++;
+        }
+    }
+    
+    return mergeCount;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<int> arr(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+    
+    int result = minMergesToPalindrome(arr);
+    cout << result << endl;
+    
+    return 0;
+}
+
