@@ -40,16 +40,21 @@ Coding :
 
 class Solution {
 public:
-    int maximumWealth(vector<vector<int>>& a) {
-        int max = 0;
-    for(int i = 0 ; i<a.size();  i++)
-    {   int sum = 0;
-        for(int j = 0 ; j<a[0].size();  j++)
-        {
-       sum = sum + a[i][j];
+    int diagonalSum(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int Sum1 = 0;
+        int Sum2 = 0;
+        
+        for (int i = 0; i < n; i++) {
+            Sum1 += mat[i][i];
+            Sum2 += mat[i][n - i - 1];
         }
-        if(sum>max) max = sum ;
-    }
-    return max;
+        
+        if (n % 2!= 0) {
+            Sum1 -= mat[n / 2][n / 2];
+        }
+    
+        
+        return Sum1+Sum2;
     }
 };
