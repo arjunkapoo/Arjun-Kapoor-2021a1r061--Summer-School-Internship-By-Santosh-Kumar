@@ -1,0 +1,72 @@
+Questions :
+
+Problem statement
+You are given a Singly Linked List of integers and an integer 'K'. Your task is to remove all such nodes from the linked list whose value is equal to 'K'.
+
+A singly linked list is a linear data structure in which we can traverse only in one direction i.e., from Head to Tail. It consists of several nodes where each node contains some data and a reference to the next node.
+
+A sample Linked List-
+
+
+Detailed explanation ( Input/output format, Notes, Images )
+Constraints:
+1 <= T <= 10
+1 <= N <= 10^5
+0 <= node.data <= 10^9 and node.data != -1 
+0 <= K <= 10^9
+
+Where 'node.data' denotes the value of a Linked list node, and 'K' denotes the value of the nodes to be removed.
+
+Time limit: 1 sec
+Sample Input 1:
+2
+2 5 7 10 -1
+7
+4 9 10 -1
+3
+Sample Output 1:
+2 5 10 -1
+4 9 10 -1
+Explanation Of Sample Input 1:
+For the first test case, the given Linked List is
+
+So, after deleting the node with value 7, the Linked List becomes 
+
+For the second test case, the given Linked List is
+
+As no node in the Linked List has value 3,  the Linked List remains unchanged.
+Sample Input 2:
+2
+4 9 4 -1
+4
+1 2 -1
+6
+Sample Output 2:
+9 -1
+1 2 -1
+Explanation Of Sample Input 2:
+For the first test case, the given Linked List is [4, 9, 4]. So, after deleting both the node with value 4, the Linked List becomes [9].
+
+For the second test case, the given Linked List is [1, 2]. As no node in the Linked List has value 6,  the Linked List remains unchanged.
+
+Coding :
+
+Node *removeNodes(Node *head, int k) {
+     if(head==NULL)
+        return NULL;
+    while(head != NULL && head->data==k)
+        head=head->next;
+    Node* curr=head;
+    Node* prev=NULL;
+    while(curr){
+        if(curr->data==k){
+            prev->next=curr->next;
+        }
+        else{
+            prev=curr;
+        }
+        curr=curr->next;
+    }
+    return head;
+}
+
