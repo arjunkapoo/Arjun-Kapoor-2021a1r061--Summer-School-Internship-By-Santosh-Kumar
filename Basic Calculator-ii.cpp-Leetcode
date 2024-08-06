@@ -36,46 +36,63 @@ Coding :
 
 class Solution {
 public:
-    int calculate(string s) {
-        stack<int> st1;
-        int ans = 0;
-        char sign = '+';
-        
-        for(int i=0 ; i<s.size() ; i++){
-            if(s[i]>='0' && s[i]<='9'){
-                int val = 0;
-                while(s[i]>='0' && s[i]<='9' && i<s.size()){
-                    val = val * 10 + (s[i]-'0');
-                    i++;
-                }
-                i--;
-                if(sign == '/'){
-                    int a = st1.top();
-                    st1.pop();
-                    int tmp = a/val;
-                    st1.push(tmp);
-                }
-                else if(sign == '*'){
-                    int a = st1.top();
-                    st1.pop();
-                    st1.push(a*val);
-                }
-                else if(sign == '+'){
-                    st1.push(val);
-                }
-                else if(sign == '-'){
-                    st1.push(val*(-1));
-                }
+    stack<char> opr;
+    stack<int> op;
+    int precedence(char ch)
+{
+    if (ch=='+' || ch=='-')
+        return 1;
+    else if(ch=='*' || ch=='/')
+        return 2;
+    else
+        return 0;
+} 
+int doProcess(){
+    int a=op.top();
+    op.pop();
+    int b=op.top();
+    op.pop();
+    char ch = opr.top();
+    opr.pop();
+    if(ch == '+')
+        return b+a;
+    else if(ch == '-')
+        return b-a;
+    else if(ch == '*')
+        return b*a;
+    else
+        return b/a;
+}   
+int calculate(string s){
+    for(int i=0;i<s.length();i++){
+        if(s[i]==' ')
+            continue;
+        else if(isdigit(s[i])){
+            int num=0;
+            while(i<s.length() && isdigit(s[i])){
+                num  = num*10+(s[i]- '0');
+                i++;
             }
-            else if(s[i] != ' '){
-                sign = s[i];
-            }
-            
+            i--;
+            op.push(num);
         }
-        while(!st1.empty()){
-            ans += st1.top();
-            st1.pop();   
-        }
-        return ans;
+        else {
+            while(!opr.empty() && precedence(s[i])<=precedence(opr.top()))
+                {
+                    int res = doProcess();
+                    op.push(res);
+                }
+                opr.push(s[i]);
+
     }
+    }
+    while(!opr.empty()){
+        int res=doProcess();
+        op.push(res);
+    }
+    return op.top();
+
+}
+    
 };
+
