@@ -66,6 +66,10 @@ int end = nums.size() - 1;
         } else {
 
             end = mid - 1;
+        }
+    }
+    return -1;
+}
 
         }
 
