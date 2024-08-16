@@ -1,0 +1,87 @@
+Questions :
+
+Given the root of a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus the sum of all keys greater than the original key in BST.
+
+As a reminder, a binary search tree is a tree that satisfies these constraints:
+
+The left subtree of a node contains only nodes with keys less than the node's key.
+The right subtree of a node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees must also be binary search trees.
+ 
+
+Example 1:
+
+
+Input: root = [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
+Output: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
+Example 2:
+
+Input: root = [0,null,1]
+Output: [1,null,1]
+ 
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 104].
+-104 <= Node.val <= 104
+All the values in the tree are unique.
+root is guaranteed to be a valid binary search tree.
+ 
+
+Note: This question is the same as 1038: https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/
+
+
+Coding :
+
+class Solution {
+public:
+
+    void inOrderUtil(TreeNode *root, vector<int> &data)
+    {
+        if (root == NULL)
+        {
+            return ; 
+        }
+        // L
+        inOrderUtil(root -> left, data) ; 
+        // N
+        data.push_back(root -> val) ; 
+        // R
+        inOrderUtil(root -> right, data) ; 
+    }
+
+    void updateUtil(TreeNode *root, vector<int> &data, int &index)
+    {
+        if (root == NULL)
+        {
+            return ; 
+        }
+        // L
+        updateUtil(root -> left, data, index) ; 
+        // N
+        root -> val = data[index] ;
+        index ++ ;   
+        // R
+        updateUtil(root -> right, data, index) ; 
+    }
+
+    TreeNode* convertBST(TreeNode* root) {
+        vector<int> data ; 
+        // store the sorted order traversal / InOrder traversal of BST
+        inOrderUtil (root, data) ; 
+
+        int n = data.size() ; 
+        // convert sorted array such that each value replaced with (original value + all values greater than than value)
+        // Data array in Ascending Order therefore traverse from END to START
+        for (int i = n - 2 ; i >= 0 ; i --)
+        {
+            data[i] += data[i + 1] ; 
+        }
+
+        int index = 0 ; 
+        // update the values of nodes of BST
+        updateUtil(root, data, index) ; 
+
+        return root ; 
+    }
+};
